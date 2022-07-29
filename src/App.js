@@ -50,7 +50,7 @@ function App() {
             <div className="btn btn-primary" onClick={prevPage}>Prev Page</div>
             <div className="btn btn-primary ms-2" onClick={nextPage}>Next Page</div>
         </div>
-    </>
+      </>
   );
 }
 

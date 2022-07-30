@@ -10,6 +10,8 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1)
   const [countriesPerPage] = useState(10)
 
+  const [countryEntry, setCountryEntry] = useState('')
+
   useEffect(() => {
     const getCountries = async () => {
       setLoading(true)
@@ -21,29 +23,51 @@ function App() {
     getCountries()
   }, [])
 
-  const lastCountryIndex = currentPage * countriesPerPage + 1
+  const lastCountryIndex = currentPage * countriesPerPage
   const firstCountryIndex = lastCountryIndex - countriesPerPage
-  const currentCountries = countries.slice(firstCountryIndex, lastCountryIndex)
+  // const currentCountries = countries.slice(firstCountryIndex, lastCountryIndex)
+  const filteredCountries = (countryEntry) ?
+    countries.filter(country => {
+      return country.name.common.toLowerCase().includes(countryEntry.toLowerCase())
+    })
+    : 
+    countries
+  const currentCountries = filteredCountries.slice(firstCountryIndex, lastCountryIndex)
 
   const paginate = currentPage => setCurrentPage(currentPage)
   const prevPage = () => {
-    setCurrentPage(prev => (prev - 1) >= 1 ? prev - 1 : prev)
+    const page = (prev => (prev - 1) >= 1 ? prev - 1 : prev)
+    setCurrentPage(page)
   }
   const nextPage = () => {
-    setCurrentPage(prev => (prev + 1) <= Math.ceil(countries.length / countriesPerPage) ? prev + 1 : prev)
+    const page = (prev => (prev + 1) <= Math.ceil(countries.length / countriesPerPage) ? prev + 1 : prev)
+    setCurrentPage(page)
   }
 
   return (
     <>
         <div className="container mt-5">
           <h1 className="text-primary">Countries</h1>
+
+          <div className="form">
+            <form className="search__form">
+              <input
+                type="text"
+                placeholder="Search a country"
+                className="search__country"
+                onChange={e => setCountryEntry(e.target.value)}
+              />
+            </form> 
+          </div>
+
           <Countries 
             countries={currentCountries} 
             loading={loading}/> 
         </div>
+
         <Pagination 
           countriesPerPage={countriesPerPage} 
-          totalCountries={countries.length}
+          totalCountriesToShow={filteredCountries.length}
           paginate={paginate} />
       
         <div>

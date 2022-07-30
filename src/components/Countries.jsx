@@ -5,15 +5,15 @@ export default function Countries({countries, loading}) {
         return <h2>Loading...</h2>
     }
   return (
-    <ul className="list-group mt-2">
+    <ul>
         {
             countries.map((country, i) => (
                 <li key={country.name.common} 
-                    className="list-group-item">
+                    className="list-group-item list-group-item-action list-group-item-info">
                     <div style={{padding: 10, flex: 1 }}>
                         {i+1} {country.name.common}
                         {country.capital}
-                        <img src={country.flags.png} alt="flag" style={{width:25}}/>
+                        <img src={country.flags.png} alt="flag" style={{width:50}}/>
                     </div>
                 </li>
             ))

@@ -1,4 +1,5 @@
 import React from 'react'
+import '../App.css';
 
 export default function Countries({countries, loading}) {
     if(loading){
@@ -13,7 +14,9 @@ export default function Countries({countries, loading}) {
                     <div style={{padding: 10, flex: 1 }}>
                         {i+1} {country.name.common}
                         {country.capital}
-                        <img src={country.flags.png} alt="flag" style={{width:50}}/>
+                        <img src={country.flags.png} alt="flag" 
+                            className="search__img"
+                            style={{width:50}}/>
                     </div>
                 </li>
             ))

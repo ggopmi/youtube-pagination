@@ -53,13 +53,27 @@ function App() {
             <form className="search__form">
               <input
                 type="text"
-                placeholder="Search a country"
-                className="search__country"
+                placeholder="Search the country"
+                className="search__input"
                 onChange={e => setCountryEntry(e.target.value)}
               />
             </form> 
           </div>
-
+          {/* <div className="form">
+            <form className="search__form">
+              <input
+                type="text"
+                placeholder="Search the country"
+                className="search__input"
+                onChange={e => setCountryEntry(e.target.value)}
+              />
+              <ul className="autocomplete">
+                <li className="autocomplete__item">Item</li>
+                <li className="autocomplete__item">Item</li>
+                <li className="autocomplete__item">Item</li>
+              </ul>
+            </form> 
+          </div> */}
           <Countries 
             countries={currentCountries} 
             loading={loading}/> 
